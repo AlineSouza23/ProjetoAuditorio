@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Listagem de usuarios</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>Telefone</th>
+				<th>Identificação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user:${usuarios}">
+				<td th:text="${user.idUsuario}"></td>
+				<td th:text="${user.nome}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${user.telefone}"></td>
+				<td><a th:href="@{/alterarUsuario(id=${user.idUsuario})}">Alterar</a></td>
+				<td><a th:href="@{/excluirUsuario(id=${user.idUsuario})}">Excluir</a></td>
+				<td></td>
+				
+				
+			</tr>
+		</tbody>
+	</table>
+	
+	 <ul class="pagination" style="text-align: center; margin: 70px;">
+	    <li th:class="${paginaAtual == 1 ? 'disabled' : 'waves-effect'}"><a th:href="${paginaAtual > 1 ? paginaAtual - 1 : '#'}"></a></li>
+	    
+	    <li th:each="p:${numPaginas}" th:class="${paginaAtual == p ? 'active black' : 'waves-effect'}"><a th:href="${p}"><span th:text="${p}"></span></a></li>
+	    
+	    <li th:class="${paginaAtual == totalPaginas ? 'disable' : 'waves-effect'}"><a th:href="${paginaAtual < totalPaginas ? paginaAtual + 1 : '#'}"></a></li>
+	  </ul>
+
+</body>
+</html>
